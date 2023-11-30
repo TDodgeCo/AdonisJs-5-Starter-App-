@@ -7,7 +7,7 @@
         <h1 class="mt-8 text-3xl text-center dark:text-white">🏠 Account</h1>
 
         <div class="mt-6 text-gray-500">
-            <p>{{ auth.user.username }}</p>
+            <p>{{ auth.user.name }}</p>
             <p>{{ auth.user.email }}</p>
             <p>{{ new Date(auth.user.createdAt).toLocaleString() }}</p>
         </div>

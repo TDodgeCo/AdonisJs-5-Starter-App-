@@ -48,7 +48,7 @@ export default class AuthController {
       const payload = await request.validate(SignUpValidator)
 
       const user = await User.create({
-        username: payload.username,
+        name: payload.name,
         email: payload.email,
         password: payload.password,
       })

@@ -4,25 +4,39 @@ import{
   column,
   beforeSave,
   BaseModel,
+  beforeFetch,
+  beforeFind,
   belongsTo,
   BelongsTo,
-  computed
+  computed,
+  hasMany,
+  HasMany
 } from '@ioc:Adonis/Lucid/Orm'
 
+import { compose } from '@ioc:Adonis/Core/Helpers'
+import { AutoPreload } from '@ioc:Adonis/Addons/AutoPreload'
+import { softDelete, softDeleteQuery } from 'App/Services/SoftDelete'
 import Role from './Role'
 import Roles from 'App/Enums/Roles'
+import Profile from './Profile'
+import Event from './Event'
 
-import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
-
-export default class User extends BaseModel {
+export default class User extends compose(BaseModel, AutoPreload) {
   public serializeExtras: boolean = true
+  public static $with = ['profile'] as const
 
-  @column()
-  @slugify({
-    strategy: 'dbIncrement',
-    fields: ['username']
-  })
-  public slug: string
+  // SOFT DELETE STUFF
+  @beforeFind()
+  public static softDeletesFind = softDeleteQuery
+
+  @beforeFetch()
+  public static softDeletesFetch = softDeleteQuery
+
+  public async delete(column?: string) {
+    await softDelete(this, column)
+  }
+
+// END SOFT DELETE STUFF
 
   @column({ isPrimary: true })
   public id: number
@@ -31,7 +45,7 @@ export default class User extends BaseModel {
   public roleId: number
 
   @column()
-  public username: string
+  public name: string
 
   @column()
   public email: string
@@ -50,6 +64,9 @@ export default class User extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @column.dateTime({ serializeAs: null})
+  public deletedAt: DateTime
 
   @computed()
   public get isAdmin() {
@@ -71,6 +88,12 @@ export default class User extends BaseModel {
 
   @belongsTo(() => Role)
   public role: BelongsTo<typeof Role>
+
+  @hasMany(() => Profile)
+  public profile: HasMany<typeof Profile>
+
+  @hasMany(() => Event)
+  public event: HasMany<typeof Event>
 
   @beforeSave()
   public static async hashPassword (user: User) {

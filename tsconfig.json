@@ -35,7 +35,9 @@
       "@adonisjs/lucid",
       "@adonisjs/auth",
       "@adonisjs/bouncer",
-      "@adonisjs/lucid-slugify"
+      "@adonisjs/lucid-slugify",
+      "@melchyore/adonis-auto-preload",
+      "@adonisjs/redis"
     ]
   }
 }

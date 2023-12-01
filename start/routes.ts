@@ -25,11 +25,20 @@ import './routes/devRoutes'
 Route.get('/', async ({ view }) => {
   return view.render('home')
 })
+Route.get('/events', async ({ view }) => {
+  return view.render('pages/events')
+})
+Route.get('/creators', async ({ view }) => {
+  return view.render('pages/creators')
+})
+
 
 
 Route.group(() => {
   Route.get('/', 'DashboardController.ingress').as('dashboard.ingress')
   Route.get('/account', 'DashboardController.getAccountView').as('dashboard.account.show')
+  Route.get('/profile', 'DashboardController.getProfileView').as('dashboard.profile.show')
+  Route.get('/events', 'DashboardController.getEventsView').as('dashboard.events.show')
 })
   .prefix('/dashboard')
   .middleware('auth')

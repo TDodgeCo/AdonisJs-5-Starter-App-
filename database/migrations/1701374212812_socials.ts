@@ -10,6 +10,7 @@ export default class extends BaseSchema {
       table.integer('event_id').unsigned().references('id').inTable('events').onDelete('CASCADE')
       table.string('soundcloud', 255).nullable()
       table.string('instagram', 255).nullable()
+      table.string('apple', 255).nullable()
       table.string('spotify', 255).nullable()
       table.string('discord', 255).nullable()
       table.string('youtube', 255).nullable()

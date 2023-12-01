@@ -14,13 +14,16 @@
 <body class="antialiased bg-gray-50 dark:bg-gray-950">
     {{-- Top Nav --}}
     @include('partials/dashboard/navbar')
+
     {{-- Dev Utility --}}
     @include('partials/utility/devUtilityElement')
     {{-- Sidebar --}}
     @include('partials/dashboard/sidebar')
     {{-- Body --}}
     <div class="antialiased">
-        @!section('body')
+        <main class="p-4 md:ml-64 h-auto pt-36">
+            @!section('body')
+        </main>
     </div>
     {{-- footer includes --}}
     @!section('footerIncludes')

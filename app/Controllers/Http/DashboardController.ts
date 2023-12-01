@@ -13,4 +13,14 @@ export default class DashboardController {
     public async getAccountView({ view }: HttpContextContract) {
         return view.render('dashboard/accountView')
     }
+
+    /** Returns ProfileView */
+    public async getProfileView({ view }: HttpContextContract) {
+        return view.render('dashboard/profileView')
+    }
+
+    /** Returns EventsView */
+    public async getEventsView({ view }: HttpContextContract) {
+        return view.render('dashboard/eventsView')
+    }
 }

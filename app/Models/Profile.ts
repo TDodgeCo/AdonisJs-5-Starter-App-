@@ -77,7 +77,7 @@ export default class Profile extends compose(BaseModel, AutoPreload) {
   public coverImage: string
 
   @column()
-  public profileImage: string
+  public avatar: string
 
   @column()
   public location: string

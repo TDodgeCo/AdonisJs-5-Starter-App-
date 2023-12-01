@@ -43,5 +43,7 @@ Server.middleware.register([
 |
 */
 Server.middleware.registerNamed({
-  auth: () => import('App/Middleware/Auth')
+  auth: () => import('App/Middleware/Auth'),
+  role: () => import('App/Middleware/Role'),
+  trace: () => import('App/Middleware/Trace'),
 })

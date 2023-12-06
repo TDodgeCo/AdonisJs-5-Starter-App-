@@ -5,6 +5,7 @@ import {
   beforeFind,
   BelongsTo,
   belongsTo,
+  computed,
   column,
   hasOne,
   HasOne
@@ -14,6 +15,7 @@ import { AutoPreload } from '@ioc:Adonis/Addons/AutoPreload'
 import { softDelete, softDeleteQuery } from 'App/Services/SoftDelete'
 import User from './User'
 import Social from './Social'
+import EventType from './EventType'
 import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
 
 export default class Event extends compose(BaseModel, AutoPreload) {
@@ -86,12 +88,6 @@ export default class Event extends compose(BaseModel, AutoPreload) {
   public coverImage: string
 
   @column()
-  public profileImage: string
-
-  @column()
-  public location: string
-
-  @column()
   public website: string
 
   @column()
@@ -125,6 +121,9 @@ export default class Event extends compose(BaseModel, AutoPreload) {
   public isFeatured: boolean
 
   @column()
+  public eventTypeId: number
+
+  @column()
   public createdBy: number | null
 
   @column()
@@ -139,6 +138,10 @@ export default class Event extends compose(BaseModel, AutoPreload) {
   @column.dateTime({ serializeAs: null})
   public deletedAt: DateTime
 
+  @computed()
+    public get eventTypeName() {
+      return EventType[this.eventTypeId]
+  }
 
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>

@@ -23,7 +23,7 @@ import './routes/authRoutes'
 import './routes/devRoutes'
 
 Route.get('/', async ({ view }) => {
-  return view.render('home')
+  return view.render('home', { testVar: 'Home'})
 })
 Route.get('/events', async ({ view }) => {
   return view.render('pages/events')

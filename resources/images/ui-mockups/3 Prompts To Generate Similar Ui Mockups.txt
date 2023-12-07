@@ -1,0 +1,8 @@
+For a General Page or Feature within the App:
+"Create a web page design that aligns with a drum and bass music app, focusing on high contrast between charcoals and whites with indigo and purple highlights. The design should be minimalist with ample negative space, featuring clean lines and modern typography. Interactive elements should be sleek, with a subtle nod to audio equipment aesthetics, maintaining the app's established design language."
+
+For a Specific Element like a Widget or Control Panel:
+"Generate a design for a widget or control panel intended for a drum and bass music app, utilizing a dark theme with a stark contrast between black and white elements, complemented by indigo and purple accents. The widget should have a functional and contemporary feel, with tactile-looking controls that suggest interactivity, keeping in line with the app's sophisticated, clean aesthetic."
+
+For a Landing Page or Promotional Material:
+"Design a landing page for a drum and bass music app that showcases a high-contrast dark mode theme with charcoal blacks, crisp whites, and strategic use of indigo and purple for visual interest. The layout should be uncluttered with focused call-to-action areas, using stylized buttons and sleek design features that resonate with the app's modern and refined style guide."

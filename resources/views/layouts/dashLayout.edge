@@ -18,13 +18,11 @@
     {{-- Top Nav --}}
     @include('partials/dashboard/navbar')
 
-    {{-- Dev Utility --}}
-    @include('partials/utility/devUtilityElement')
     {{-- Sidebar --}}
     @include('partials/dashboard/sidebar')
     {{-- Body --}}
     <div class="antialiased">
-        <main class="p-4 md:ml-64 h-auto pt-36">
+        <main class="h-auto p-4 md:ml-64 pt-36">
         
             @!section('body')
         </main>

@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import ResourceService from 'App/Services/ResourceService'
 
 
 export default class DashboardController {
@@ -15,12 +16,11 @@ export default class DashboardController {
     }
 
     /** Returns ProfileView */
-    public async getProfileView({ view }: HttpContextContract) {
-        return view.render('dashboard/profileView')
-    }
-
-    /** Returns EventsView */
-    public async getEventsView({ view }: HttpContextContract) {
-        return view.render('dashboard/eventsView')
+    public async getAdminDataView({ view, params }: HttpContextContract) {
+        const param = params.resource
+        console.log(param)
+        const resources = await ResourceService.getManyResources(param)
+        const count = await ResourceService.getRawResourceCounts()
+        return view.render('dashboard/admin/dataView', { resources, count })
     }
 }

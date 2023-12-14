@@ -2,7 +2,26 @@
 
 @section('body')
     <div class="grid grid-cols-1 gap-4 mb-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="h-32 border-2 border-gray-300 border-dashed rounded-lg dark:border-gray-600 md:h-64"></div>
+        <div class="h-32 border-2 border-gray-300 border-dashed rounded-lg dark:border-gray-600 md:h-64">
+            @can('Role.admin')
+            <div class="flex items-center justify-between px-4 py-2">
+                <div class="flex flex-col">
+                    <div class="text-sm font-medium text-gray-900 dark:text-gray-100">Total Subscribers</div>
+                    <div class="text-lg font-semibold text-gray-900 dark:text-gray-100">71,897</div>
+                </div>
+                <div class="p-3 text-white bg-green-500 rounded-full">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            fill-rule="evenodd"
+                            d="M10 2C5.03 2 1 6.03 1 11C1 15.97 5.03 20 10 20C14.97 20 19 15.97 19 11C19 6.03 14.97 2 10 2ZM8.41 14.59L4.41 10.59C4.05 10.22 4.05 9.61 4.41 9.24C4.78 8.88 5.39 8.88 5.76 9.24L9 12.5L14.24 7.24C14.61 6.88 15.22 6.88 15.59 7.24C15.95 7.61 15.95 8.22 15.59 8.59L10.59 13.59C10.22 13.95 9.61 13.95 9.24 13.59C8.88 13.22 8.88 12.61 8.41 12.24L8.41 14.59Z"
+                            clip-rule="evenodd"
+                        ></path>
+                    </svg>
+                </div>
+            </div>
+            @end
+            
+        </div>
         <div class="h-32 border-2 border-gray-300 border-dashed rounded-lg dark:border-gray-600 md:h-64"></div>
         <div class="h-32 border-2 border-gray-300 border-dashed rounded-lg dark:border-gray-600 md:h-64"></div>
         <div class="h-32 border-2 border-gray-300 border-dashed rounded-lg dark:border-gray-600 md:h-64"></div>

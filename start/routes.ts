@@ -39,6 +39,9 @@ Route.group(() => {
   Route.get('/account', 'DashboardController.getAccountView').as('dashboard.account.show')
   Route.get('/profile', 'DashboardController.getProfileView').as('dashboard.profile.show')
   Route.get('/events', 'DashboardController.getEventsView').as('dashboard.events.show')
+
+
+  Route.get('/admin/data/:resource?', 'DashboardController.getAdminDataView').as('dashboard.admin.data.show')
 })
   .prefix('/dashboard')
   .middleware('auth')

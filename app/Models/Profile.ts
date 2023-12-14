@@ -19,7 +19,7 @@ import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
 
 export default class Profile extends compose(BaseModel, AutoPreload) {
   public serializeExtras: boolean = true
-  public static $with = ['social'] as const
+  // public static $with = ['profileSocials'] as const
 
    // SOFT DELETE STUFF
    @beforeFind()

@@ -18,7 +18,7 @@
                             :class="account ? 'dark:text-primary-600' : ''"
                             class="block py-3 px-4 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-500 dark:hover:border-primary-500 hover:border-primary-600">Account</button>
                     </li>
-                    @can('RolePolicy.mod')
+                    @can('Role.mod')
                     <li class="block border-b dark:border-gray-700 lg:inline lg:border-b-0">
                         <button @click="profile = false, account = false, admin = true" type="button"
                             :class="admin ? 'dark:text-primary-600' : ''"

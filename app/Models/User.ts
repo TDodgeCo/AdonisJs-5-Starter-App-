@@ -23,7 +23,7 @@ import Event from './Event'
 
 export default class User extends compose(BaseModel, AutoPreload) {
   public serializeExtras: boolean = true
-  public static $with = ['profile'] as const
+  // public static $with = ['profile'] as const
 
   // SOFT DELETE STUFF
   @beforeFind()

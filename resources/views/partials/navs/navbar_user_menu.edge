@@ -7,38 +7,77 @@
         alt="user photo" />
 </button>
 <!-- Dropdown menu -->
-<div class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-800 dark:divide-gray-500"
+<div class="z-50 hidden w-56 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-800 dark:divide-gray-500"
     id="dropdown">
-    <div class="py-3 px-4">
+    <div class="px-4 py-3">
         <span class="block text-sm text-gray-900 dark:text-white">
-            {{ auth.user.name }}
+            {{ auth.user.name }} 
         </span>
+        @can('Role.admin') 
+            <span class="block text-xs text-gray-900 dark:text-secondary-300">Current Role: {{ Roles[auth.user.roleId] }}</span> 
+        @endcan
         <span class="block text-sm text-gray-900 truncate dark:text-white">{{ auth.user.email }}</span>
     </div>
     <ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
         <li>
             <a href="{{ route('dashboard.ingress') }}"
-                class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">
+                class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">
                 Dashboard
             </a>
         </li>
         <li>
             <a href="{{ route('dashboard.profile.show') }}"
-                class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">
+                class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">
                 Profile
             </a>
         </li>
         <li>
             <a href="{{ route('dashboard.account.show') }}"
-                class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">
+                class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">
                 Account
             </a>
         </li>
     </ul>
+    @can('Dev.devOrAdmin')
+        <ul x-data="{showLogin: false}" class="py-1 text-gray-700 cursor-pointer dark:text-gray-300" aria-labelledby="dropdown">
+            <li class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" @click="showLogin = ! showLogin">
+                Login As
+            </li>
+            <div x-show="showLogin">
+                <li class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">
+                    <form action="/dev/login-as" method="POST"> {{csrfField()}} <input name="targetRole" type="number" value="3"
+                            hidden><button type="submit">Admin</button></form>
+                </li>
+                <li class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">
+                    <form action="/dev/login-as" method="POST"> {{csrfField()}} <input name="targetRole" type="number" value="2"
+                            hidden><button type="submit">Mod</button></form>
+                </li>
+                <li class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white" x-data="{showAppDropdown: false}">
+                    <button @click="showAppDropdown = ! showAppDropdown" type="button">User</button>
+                    <ul class="ml-2" x-show="showAppDropdown">
+                        <li class="hover:text-primary-700">
+                            <form action="/dev/login-as" method="POST"> {{csrfField()}}
+                                <input name="targetRole" type="number" value="2" hidden>
+                                <input name="onboarded" type="text" value="false" hidden>
+                                <button type="submit">!Verified</button>
+                            </form>
+                        </li>
+                        <li class="hover:text-primary-700">
+                            <form action="/dev/login-as" method="POST"> {{csrfField()}}
+                                <input name="targetRole" type="number" value="2" hidden>
+                                <input name="onboarded" type="text" value="true" hidden>
+                                <button type="submit">Verified</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </div>    
+        </ul>
+    @end
     <ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
         <li>
             <a href="{{ route('auth.logout') }}"
-                class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logout</a>
+                class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logout</a>
         </li>
     </ul>
 </div>

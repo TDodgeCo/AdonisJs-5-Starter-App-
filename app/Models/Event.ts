@@ -20,7 +20,7 @@ import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
 
 export default class Event extends compose(BaseModel, AutoPreload) {
   public serializeExtras: boolean = true
-  public static $with = ['social'] as const
+  // public static $with = ['eventSocials'] as const
 
    // SOFT DELETE STUFF
    @beforeFind()

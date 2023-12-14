@@ -17,10 +17,13 @@ export default class DashboardController {
 
     /** Returns ProfileView */
     public async getAdminDataView({ view, params }: HttpContextContract) {
-        const param = params.resource
+        let param = params.resource
+        if (!param) param = 'user'
         console.log(param)
-        const resources = await ResourceService.getManyResources(param)
+        const data = await ResourceService.getManyResources(param)
+        // const records = await ResourceService.getResource(param)
         const count = await ResourceService.getRawResourceCounts()
-        return view.render('dashboard/admin/dataView', { resources, count })
+        console.log(`count is ${count}`)
+        return view.render('dashboard/admin/dataView', { data, count })
     }
 }

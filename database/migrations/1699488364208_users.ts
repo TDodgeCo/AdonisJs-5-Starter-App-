@@ -5,8 +5,8 @@ export default class extends BaseSchema {
 
   public async up() {
     this.schema.alterTable(this.tableName, (table) => {
-      table.string('name').unique()
-      table.boolean('email_verified')
+      table.string('name').unique().comment('assignable:user')
+      table.boolean('email_verified').comment('system')
     })
   }
 

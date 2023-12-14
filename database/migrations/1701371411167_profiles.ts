@@ -5,36 +5,36 @@ export default class extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id')
-      table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
-      table.string('title', 255).notNullable().unique()
-      table.string('slug').unique()
-      table.string('cover_image', 255).nullable()
-      table.string('avatar', 255).nullable()
-      table.string('location', 255).nullable()
-      table.string('website', 255).nullable()
-      table.string('featured_video', 255).nullable()
-      table.string('featured_song', 255).nullable()
-      table.integer('soundcloud_id').nullable()
-      table.boolean('is_primary_profile').defaultTo(true)
-      table.boolean('is_artist').defaultTo(false)
-      table.boolean('is_verified_artist').defaultTo(false)
-      table.boolean('is_claimed').defaultTo(true) // user has claimed this profile
-      table.boolean('artist_consent').defaultTo(false) // user consents to having their music shared on the site
-      table.text('bio').nullable()
-      table.boolean('is_private').defaultTo(false)
+      table.increments('id').comment('system')
+      table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE').comment('assignable:admin')
+      table.string('title', 255).notNullable().unique().comment('assignable:user')
+      table.string('slug').unique().comment('assignable:user')
+      table.string('cover_image', 255).nullable().comment('assignable:user')
+      table.string('avatar', 255).nullable().comment('assignable:user')
+      table.string('location', 255).nullable().comment('assignable:user')
+      table.string('website', 255).nullable().comment('assignable:user')
+      table.string('featured_video', 255).nullable().comment('assignable:user')
+      table.string('featured_song', 255).nullable().comment('assignable:user')
+      table.integer('soundcloud_id').nullable().comment('assignable:user')
+      table.boolean('is_primary_profile').defaultTo(true).comment('assignable:user')
+      table.boolean('is_artist').defaultTo(false).comment('system')
+      table.boolean('is_verified_artist').defaultTo(false).comment('assignable:admin')
+      table.boolean('is_claimed').defaultTo(true).comment('system') // user has claimed this profile
+      table.boolean('artist_consent').defaultTo(false).comment('system') // user consents to having their music shared on the site
+      table.text('bio').nullable().comment('assignable:user')
+      table.boolean('is_private').defaultTo(false).comment('assignable:user')
       
-      table.boolean('is_featured').defaultTo(false)
+      table.boolean('is_featured').defaultTo(false).comment('assignable:admin')
 
       // OLD
-      table.integer('created_by').unsigned().references('id').inTable('users')
-      table.integer('updated_by').unsigned().references('id').inTable('users')
+      table.integer('created_by').unsigned().references('id').inTable('users').comment('system')
+      table.integer('updated_by').unsigned().references('id').inTable('users').comment('system')
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */
-      table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
-      table.dateTime("deleted_at").defaultTo(null)
+      table.timestamp('created_at', { useTz: true }).comment('system')
+      table.timestamp('updated_at', { useTz: true }).comment('system')
+      table.dateTime("deleted_at").defaultTo(null).comment('system')
     })
   }
 

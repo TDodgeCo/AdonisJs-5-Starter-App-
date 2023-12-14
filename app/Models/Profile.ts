@@ -6,8 +6,6 @@ import {
   beforeFind,
   belongsTo,
   BelongsTo,
-  hasOne,
-  HasOne,
   manyToMany,
   ManyToMany,
 } from '@ioc:Adonis/Lucid/Orm'
@@ -16,7 +14,7 @@ import { compose } from '@ioc:Adonis/Core/Helpers'
 import { AutoPreload } from '@ioc:Adonis/Addons/AutoPreload'
 import { softDelete, softDeleteQuery } from 'App/Services/SoftDelete'
 import User from './User'
-import Social from './SocialOld'
+import Social from './Social'
 import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
 
 export default class Profile extends compose(BaseModel, AutoPreload) {

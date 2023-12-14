@@ -7,14 +7,14 @@ import {
   belongsTo,
   computed,
   column,
-  hasOne,
-  HasOne
+  manyToMany,
+  ManyToMany
 } from '@ioc:Adonis/Lucid/Orm'
 import { compose } from '@ioc:Adonis/Core/Helpers'
 import { AutoPreload } from '@ioc:Adonis/Addons/AutoPreload'
 import { softDelete, softDeleteQuery } from 'App/Services/SoftDelete'
 import User from './User'
-import Social from './SocialOld'
+import Social from './Social'
 import EventType from './EventType'
 import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
 
@@ -146,6 +146,8 @@ export default class Event extends compose(BaseModel, AutoPreload) {
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>
 
-  @hasOne(() => Social)
-  public social: HasOne<typeof Social>
+  @manyToMany(() => Social, {
+    pivotColumns: ['url'],
+  })
+  public eventSocials: ManyToMany<typeof Social>
 }

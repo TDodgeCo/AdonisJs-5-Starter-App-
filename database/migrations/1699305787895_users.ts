@@ -20,6 +20,7 @@ export default class extends BaseSchema {
        */
       table.timestamp('created_at', { useTz: true }).notNullable()
       table.timestamp('updated_at', { useTz: true }).notNullable()
+      table.timestamp("banned_at").defaultTo(null)
       table.dateTime("deleted_at").defaultTo(null)
     })
   }

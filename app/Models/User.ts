@@ -68,6 +68,9 @@ export default class User extends compose(BaseModel, AutoPreload) {
   @column.dateTime({ serializeAs: null})
   public deletedAt: DateTime
 
+  @column.dateTime({ serializeAs: null})
+  public bannedAt: DateTime
+
   @computed()
   public get isAdmin() {
     return this.roleId === Roles.ADMIN

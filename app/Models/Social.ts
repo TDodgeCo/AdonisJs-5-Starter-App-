@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, manyToMany, ManyToMany, } from '@ioc:Adonis/Lucid/Orm'
 import Profile from './Profile'
+import Event from './Event'
 
 export default class Social extends BaseModel {
   @column({ isPrimary: true })
@@ -18,6 +19,13 @@ export default class Social extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @manyToMany(() => Profile)
+  @manyToMany(() => Profile, {
+    pivotColumns: ['url'],
+  })
   public profileSocials: ManyToMany<typeof Profile>
+
+  @manyToMany(() => Event, {
+    pivotColumns: ['url'],
+  })
+  public eventSocials: ManyToMany<typeof Event>
 }

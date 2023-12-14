@@ -82,14 +82,25 @@
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        @if(data.records.length < 1)
+                            <tr>
+                                @each((value, key) in data.columnTypes)
+                                
+                                    <th scope="col" class="px-4 py-4">{{key}}</th>
+                                
+                                @end
+                            </tr>
+                        @else
                         <tr>
                             @each((value, key) in data.records[0])
-                            <th scope="col" class="px-4 py-4">{{key}}</th>
+                                <th scope="col" class="px-4 py-4">{{key}}</th>
                             @end
-                            <th scope="col" class="px-4 py-3">
-                                <span class="sr-only">Actions</span>
-                            </th>
                         </tr>
+                        @endif
+                        
+                        <th scope="col" class="px-4 py-3">
+                            <span class="sr-only">Actions</span>
+                        </th>
                     </thead>
                     <tbody>
                         @each(item in data.records)

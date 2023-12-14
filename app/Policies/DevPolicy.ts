@@ -4,6 +4,6 @@ import Env from '@ioc:Adonis/Core/Env'
 
 export default class DevPolicy extends BasePolicy {
     public async devOrAdmin(user: User) {
-		return user.isAdmin || Env.get('NODE_ENV') === 'development'
+		return Env.get('NODE_ENV') == 'development' || user.roleId == 1
 	}
 }

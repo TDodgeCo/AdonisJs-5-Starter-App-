@@ -22,6 +22,7 @@ export default class ResourceService {
     | modelMapping
     |--------------------------------------------------------------------------
     */
+    // This maps String model names to their respective query builder functions
     private static modelMapping: { [key: string]: () => ModelQueryBuilderContract<any, any>} = {
         'user': () => User.query(),
         'profile': () => Profile.query(),
@@ -29,6 +30,12 @@ export default class ResourceService {
         'social': () => Social.query(),
     }
 
+    /* 
+    |--------------------------------------------------------------------------
+    | columnMapping
+    |--------------------------------------------------------------------------
+    */
+    // This maps column data types html5 input type proxies
     private static columnMapping: { [key: string]: string } = {
         'boolean': 'checkbox',
         'integer': 'number',
@@ -39,60 +46,11 @@ export default class ResourceService {
 
     /* 
     |--------------------------------------------------------------------------
-    | getRawCounts
-    |--------------------------------------------------------------------------
-    */
-    public static async getRawResourceCounts() {
-        const fetchCounts = await Promise.all([
-            await User.query().count('* as total'),
-            await Profile.query().count('* as total'),
-            await Event.query().count('* as total'),
-            await Social.query().count('* as total'),
-        ])
-
-        const counts = {
-            users: Number(fetchCounts[0][0].$extras.total),
-            profiles: Number(fetchCounts[1][0].$extras.total),
-            events: Number(fetchCounts[2][0].$extras.total),
-            socials: Number(fetchCounts[3][0].$extras.total),
-        }
-
-        return counts
-    }
-
-    /* 
-    |--------------------------------------------------------------------------
-    | getResource
-    |--------------------------------------------------------------------------
-    */
-    // This function returns a list of resources based on the param (or lack thereof - param WIP) passed in
-
-    
-    public static async getResource() {
-        // not sure how or if I want to implement this
-        // await this.initializeCounts()
-        const count = await User.query().count('* as total')
-        const records = await User.query().paginate(1, 10)
-        const resource = {
-            title: 'User',
-            count: count[0].$extras.total,
-            keys: User.$keys.attributesToColumns['keys'],
-            records: records.serialize()
-        }
-        
-        return resource
-    }
-
-
-    /* 
-    |--------------------------------------------------------------------------
     | getManyResources
     |--------------------------------------------------------------------------
     */
-    // This function returns a list of resources based on the provided url param
+    // This method returns a list of resources, their counts, and html5 input type proxies for each column
     public static async getManyResources(param?: string ) {
-        // not sure how or if I want to implement this
-        // await this.initializeCounts()
         let resources: Resource[] = []
         let records
         let columnTypes

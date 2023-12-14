@@ -6,7 +6,7 @@ export default class extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').comment('system')
-      table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE').comment('assignable:admin')
+      table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE').comment('assignable:user')
       table.string('title', 255).notNullable().unique().comment('assignable:user')
       table.string('slug').unique().comment('assignable:user')
       table.string('cover_image', 255).nullable().comment('assignable:user')
@@ -15,7 +15,7 @@ export default class extends BaseSchema {
       table.string('website', 255).nullable().comment('assignable:user')
       table.string('featured_video', 255).nullable().comment('assignable:user')
       table.string('featured_song', 255).nullable().comment('assignable:user')
-      table.integer('soundcloud_id').nullable().comment('assignable:user')
+      table.string('soundcloud_id').nullable().comment('assignable:user')
       table.boolean('is_primary_profile').defaultTo(true).comment('assignable:user')
       table.boolean('is_artist').defaultTo(false).comment('system')
       table.boolean('is_verified_artist').defaultTo(false).comment('assignable:admin')

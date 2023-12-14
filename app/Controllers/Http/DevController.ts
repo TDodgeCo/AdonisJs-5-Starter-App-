@@ -7,7 +7,15 @@ export default class DevController {
     the environment check is done in the route file.
     */
     public async devLoginAs({ request, response, logger, auth }: HttpContextContract) {
+        if (!request.input('targetRole')) {
+            if (auth.isLoggedIn) {
+                await auth.logout()
+            }
+            await auth.loginViaId(1)
+            return response.redirect().back()
+        }
         const targetRole = request.input('targetRole')
+        
         let targetUser = await User.findBy('roleId', targetRole)
         if (targetRole == 1) {
             const onboarded = request.input('onboarded')

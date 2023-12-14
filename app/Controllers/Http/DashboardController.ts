@@ -14,8 +14,13 @@ export default class DashboardController {
     public async getAccountView({ view }: HttpContextContract) {
         return view.render('dashboard/accountView')
     }
-
+    
     /** Returns ProfileView */
+    public async getProfileView({ view }: HttpContextContract) {
+        return view.render('dashboard/profileView')
+    }
+
+    /** Returns getAdminDataView */
     public async getAdminDataView({ view, params }: HttpContextContract) {
         let param = params.resource
         if (!param) param = 'user'

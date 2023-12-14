@@ -25,9 +25,6 @@ import './routes/devRoutes'
 Route.get('/', async ({ view }) => {
   return view.render('home', { testVar: 'Home'})
 })
-Route.get('/events', async ({ view }) => {
-  return view.render('pages/events')
-})
 Route.get('/creators', async ({ view }) => {
   return view.render('pages/creators')
 })
@@ -47,3 +44,6 @@ Route.group(() => {
   .middleware('auth')
 
 Route.resource('socials', 'SocialsController')
+Route.resource('events', 'EventsController')
+Route.resource('users', 'UsersController')
+Route.resource('profiles', 'ProfilesController')

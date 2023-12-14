@@ -10,7 +10,7 @@ import{
   BelongsTo,
   computed,
   hasMany,
-  HasMany
+  HasMany,
 } from '@ioc:Adonis/Lucid/Orm'
 
 import { compose } from '@ioc:Adonis/Core/Helpers'

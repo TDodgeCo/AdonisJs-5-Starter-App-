@@ -14,7 +14,7 @@ import { compose } from '@ioc:Adonis/Core/Helpers'
 import { AutoPreload } from '@ioc:Adonis/Addons/AutoPreload'
 import { softDelete, softDeleteQuery } from 'App/Services/SoftDelete'
 import User from './User'
-import Social from './Social'
+import Social from './SocialOld'
 import EventType from './EventType'
 import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
 

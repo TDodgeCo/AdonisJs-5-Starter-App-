@@ -1,0 +1,37 @@
+// .commands/DbSeedIndex.ts
+import DbSeed from '@adonisjs/lucid/build/commands/DbSeed'
+// import databaseConfig from '../../config/database' // Adjust the path as needed
+import { flags } from '@adonisjs/core/build/standalone'
+
+export default class DbSeedIndex extends DbSeed {
+  public static commandName = 'db:seed'
+  public static description = 'Execute database seeders with an optional index'
+  public static settings = {
+    loadApp: true,
+  }
+
+  @flags.number({ alias: 'n', description: 'Index of the seeder to run' })
+  public index: number
+  
+  public async run(): Promise<void> {
+    const {default: databaseConfig} = await import('../../config/database')
+
+
+    if (this.index !== undefined && databaseConfig.connections.pg.seeders !== undefined) {
+      
+      const seederPaths = databaseConfig.connections.pg.seeders.paths
+      if (this.index < 0 || this.index >= seederPaths.length) {
+        this.logger.error(`No seeder found at index ${this.index}`)
+        this.exitCode = 1
+        return
+      }
+
+      const seederFile = seederPaths[this.index]
+      
+      this.files = [seederFile] // Set the file to be the selected seeder
+    }
+
+    // Run the original run() method
+    await super.run()
+  }
+}

@@ -47,9 +47,12 @@ const databaseConfig: DatabaseConfig = {
       },
       healthCheck: false,
       debug: false,
+      seeders: {
+        paths:
+          Env.get('NODE_ENV') === 'development' ? ['./database/seeders/DevSeeder'] : ['./database/seeders/ProdSeeder']
+      },
     },
-
-  }
+  },
 }
 
 export default databaseConfig

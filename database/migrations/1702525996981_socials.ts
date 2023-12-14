@@ -6,8 +6,8 @@ export default class extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').comment('system')
-      table.string('name', 50).notNullable().unique().comment('assignable:admin')
-      table.string('logo_url', 255).nullable().defaultTo(null).comment('assignable:admin')
+      table.string('name', 50).notNullable().unique().comment('assignable:user')
+      table.string('logo_url', 255).nullable().defaultTo(null).comment('assignable:user')
       
 
       /**

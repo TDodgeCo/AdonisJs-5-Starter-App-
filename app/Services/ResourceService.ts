@@ -34,7 +34,7 @@ export default class ResourceService {
         'integer': 'number',
         'timestamp with time zone': 'datetime-local',
         'character varying': 'text',
-        'text': 'text',
+        'text': 'textarea',
     }
 
     /* 
@@ -128,7 +128,8 @@ export default class ResourceService {
                         c.table_name = '${param}s' AND 
                         pg_class.relname = '${param}s' AND
                         col_description(pg_class.oid, a.attnum) IS NOT NULL AND
-                        col_description(pg_class.oid, a.attnum) <> 'system'
+                        col_description(pg_class.oid, a.attnum) <> 'system' AND
+                        col_description(pg_class.oid, a.attnum) <> 'assignable:admin'
                 `)
                 console.log(columns)
                 columns = columns.rows.reduce((acc, column) => {

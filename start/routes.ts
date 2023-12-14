@@ -45,3 +45,5 @@ Route.group(() => {
 })
   .prefix('/dashboard')
   .middleware('auth')
+
+Route.resource('socials', 'SocialsController')

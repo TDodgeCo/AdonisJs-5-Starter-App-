@@ -8,6 +8,7 @@ export default class extends BaseSchema {
       table.increments('id').comment('system')
       table.string('name', 50).notNullable().unique().comment('assignable:user')
       table.string('logo_url', 255).nullable().defaultTo(null).comment('assignable:user')
+      table.text('icon').nullable().defaultTo(null).comment('assignable:user')
       
 
       /**

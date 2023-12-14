@@ -13,6 +13,9 @@ export default class Social extends BaseModel {
   @column()
   public logoUrl: string
 
+  @column()
+  public icon: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
